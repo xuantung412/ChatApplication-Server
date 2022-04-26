@@ -1,0 +1,11 @@
+How this Model work:
+
+The Sever will allow multiple access using TCP/IP model to allow connection form multiple sever.
+Client will open the file, transfered all data of files and DELETE the file. Then Client will send the message to Sever as a command.
+Sever received command message from Clients -> Server save write data to .txt file as a backup file( incase error or outage) -> Sever will calculate jobs for each thread( how many lines for each thread).
+The Jobs will be calulated using Remainder calculater: Last thread will take all the remainder. For example: 11 jobs with 2 threads-> first thread takes 5, last thead takes 6. 11 jobs- 7 threads-> each thread takes 1, last thread take 5
+Each threads will finished the jobs and write down the output as .txt file. Sever will wait for the last threads( which has most job) completed to continue merge these output files->Sever send back to Client
+Client receive output from sever- > write back to original files.
+
+Note: Server will store all output of threads, transfered from clients to prevent unexpected errors( outage, system error..) and implement SystemLog in future. All these files are saved to local server files.
+Next client will need to wait previous client finished requested jobs to be processed.
